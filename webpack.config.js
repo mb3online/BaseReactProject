@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/main.jsx',
   devServer: {
     contentBase: "public/",
     port: 8080
@@ -10,7 +10,7 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.js|\.jsx$/,
       exclude: /node_modules/,
       loader: "babel",
       include: __dirname
