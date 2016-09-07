@@ -5,14 +5,25 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --inline --hot",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --colors",
+    "test:watch": "jest --colors --watch",
+    "test:new": "jest --onlyChanged"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "jest": {
-    "testRegex": ".*-specs.\\js",
+    "notify": false,
+    "rootDir": "lib",
+    "testPathDirs": [
+      "components"
+    ],
+    "testRegex": ".(spec).js[x]?$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json"
+    ],
     "unmockedModulePathPatterns": [
       "react",
       "react-dom",
@@ -32,6 +43,7 @@
     ]
   },
   "dependencies": {
+    "fbemitter": "^2.1.1",
     "immutable": "^3.8.1",
     "material-ui": "^0.15.4",
     "path": "^0.12.7",
@@ -47,6 +59,7 @@
     "webpack": "^1.13.2"
   },
   "devDependencies": {
+    "@kadira/storybook": "^2.11.0",
     "babel-core": "^6.14.0",
     "babel-jest": "^14.1.0",
     "babel-loader": "^6.2.5",
