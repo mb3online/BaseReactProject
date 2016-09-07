@@ -4,12 +4,12 @@ import TextField from 'material-ui/TextField';
 // import DatePicker from 'material-ui/DatePicker';
 import {EventEmitter} from 'fbemitter';
 
-export default class InputComponent extends React.Component {
+export default class InputComponent extends Component {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.emitter = new EventEmitter();
-    this._generatePropTypesConfig();
+    this.propTypes = this._generatePropTypesConfig();
   }
 
   onChange(value) {
@@ -27,19 +27,18 @@ export default class InputComponent extends React.Component {
 
   _generatePropTypesConfig() {
     let config = {
-      id: PropTypes.string.required,
-      hint: PropTypes.string.required,
-      label: PropTypes.string.required,
-      shouldDisable: PropTypes.func.required,
-      inputType: PropTypes.string.required,
+      id: PropTypes.string,
+      label: PropTypes.string,
+      shouldDisable: PropTypes.func,
+      inputType: PropTypes.string,
     };
 
     switch(this.props.inputType) {
       case InputComponent.TYPES.TEXT:
         Object.assign({}, config, {
-          type: PropTypes.string.required,
-          name: PropTypes.string.required,
-          errorText: PropTypes.string.required,
+          type: PropTypes.string,
+          name: PropTypes.string,
+          errorText: PropTypes.string,
           fullWidth: PropTypes.boolean,
           defaultValue: PropTypes.any,
         });
@@ -47,9 +46,9 @@ export default class InputComponent extends React.Component {
 
       case InputComponent.TYPES.DATE:
         Object.assign({}, config, {
-          type: PropTypes.string.required,
-          name: PropTypes.string.required,
-          errorText: PropTypes.string.required,
+          type: PropTypes.string,
+          name: PropTypes.string,
+          errorText: PropTypes.string,
           closeOnSelect: PropTypes.boolean,
           initialDate: PropTypes.object,
           minDate: PropTypes.object,
@@ -73,8 +72,8 @@ export default class InputComponent extends React.Component {
 
       case InputComponent.TYPES.MULTILINE:
         Object.assign({}, config, {
-          name: PropTypes.array.required,
-          errorText: PropTypes.string.required,
+          name: PropTypes.array,
+          errorText: PropTypes.string,
           fullWidth: PropTypes.boolean,
           defaultValue: PropTypes.number,
           rows: PropTypes.number,
@@ -140,7 +139,6 @@ export default class InputComponent extends React.Component {
         return (
           <TextField
             id={this.props.id}
-            type="text"
             name={this.props.name}
             errorText={this.props.errorText}
             hintText={this.props.hint}
@@ -149,7 +147,7 @@ export default class InputComponent extends React.Component {
             defaultValue={this.props.defaultValue}
             onChange={this.onChange}
             disabled={this.props.shouldDisable()}
-            multiLine
+            multiLine={true}
             rows={this.props.rows}
             rowsMax={this.props.rowsMax}
           />

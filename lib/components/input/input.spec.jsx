@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { shallow, render } from 'enzyme';
 
 import InputComponent from './input';
 
-describe('Input', () => {
-  it('should contain a material-ui Text Field for text', () => {
-    const ref = shallow(<InputComponent type="text" />);
-    expect(ref).toBeDefined();
-    expect(ref.find(<input type="text" />)).toBeTruthy();
+describe('Input Component', () => {
+  it('should contain a material-ui TextField for text', () => {
+    const ref = render(<InputComponent inputType="text" type="password" id="t"/>);
+    expect(ref.prop(id)).toBe('t');
   });
   it('should contain a material-ui Select Field for select', () => {
     fail('SelectField Material-UI component is broken');
@@ -23,9 +22,9 @@ describe('Input', () => {
     // expect(red.find(<input type="date" />)).toBeTruthy();
   });
   it('should contain a material-ui Multiline TextField for date', () => {
-    // fail('Throws weird error');
-    const ref = shallow(<InputComponent type="multiline" rows={6} />);
-    expect(ref).toBeDefined();
-    expect(ref.find(<textarea />)).toBeTruthy();
+    fail('Throws weird error');
+    // const ref = shallow(<InputComponent inputType="multiline" rows={6} />);
+    // expect(ref).toBeDefined();
+    // expect(ref.find(<textarea />)).toBeTruthy();
   });
 });
