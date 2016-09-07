@@ -1,36 +1,54 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {storiesOf} from '@kadira/storybook';
+import {storiesOf, action} from '@kadira/storybook';
 
-import {InputComponent} from '../../lib/components';
+import {TextInput, DateInput, MultilineInput} from '../../lib/components';
+
+storiesOf('Date Picker', module)
+  .add('default', () => {
+    <MuiThemeProvider>
+      <DateInput
+        id="datepicker"
+        closeOnSelect={true}
+        floatingLabelText="test"
+        shouldDisable={() => false}
+        labels={{
+          ok: 'hello',
+          cancel: 'not hello'
+        }}
+        onChange={(event, key, payload) =>
+          action(`Change Input: ${event}, ${key}, ${payload}`)}
+      />
+    </MuiThemeProvider>
+  });
 
 storiesOf('Input', module)
   .add('single line', () => (
     <MuiThemeProvider>
-      <InputComponent
+      <TextInput
         id="1"
-        inputType="text"
-        label="simple label"
-        hint="a small hint"
-        shouldDisable={() => false} />
+        floatingLabelText="simple label"
+        hintText="a small hint"
+        shouldDisable={() => false}
+        onChange={(event, key, payload) =>
+          action(`Change Input: ${event}, ${key}, ${payload}`)}
+      />
     </MuiThemeProvider>))
   .add('multiline', () => (
     <MuiThemeProvider>
-      <InputComponent
+      <MultilineInput
         id="2"
-        inputType="multiline"
-        label="this is multiple lines"
+        floatingLabelText="this is multiple lines"
         maxRows={10}
         shouldDisable={() => false}
       />
     </MuiThemeProvider>))
   .add('password', () => (
     <MuiThemeProvider>
-      <InputComponent
-        id="2"
-        inputType="text"
+      <TextInput
+        id="4"
         type="password"
-        label="password"
+        floatingLabelText="password"
         errorText="Please enter a password"
         shouldDisable={() => false}
       />

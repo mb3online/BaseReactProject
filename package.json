@@ -40,7 +40,8 @@
             "function-bind",
             "object-keys",
             "object.values",
-            "es-abstract"
+            "es-abstract",
+            "material-ui"
         ]
     },
     "dependencies": {
