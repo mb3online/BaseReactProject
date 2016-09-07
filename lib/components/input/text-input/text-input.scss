@@ -1,0 +1,6 @@
+@import '../input';
+
+.text-input {
+  @include size(100px);
+  color: $secondary;
+}
