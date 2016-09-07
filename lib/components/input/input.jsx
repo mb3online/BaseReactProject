@@ -5,9 +5,8 @@ import TextField from 'material-ui/TextField';
 import {EventEmitter} from 'fbemitter';
 
 export default class InputComponent extends React.Component {
-  constructor(props, type) {
+  constructor(props) {
     super(props);
-    this.type = type;
     this.onChange = this.onChange.bind(this);
     this.emitter = new EventEmitter();
     this._generatePropTypesConfig();
@@ -32,10 +31,11 @@ export default class InputComponent extends React.Component {
       hint: PropTypes.string.required,
       label: PropTypes.string.required,
       shouldDisable: PropTypes.func.required,
+      inputType: PropTypes.string.required,
     };
 
-    switch(this.type) {
-      case this.TYPES.TEXT:
+    switch(this.props.inputType) {
+      case InputComponent.TYPES.TEXT:
         Object.assign({}, config, {
           type: PropTypes.string.required,
           name: PropTypes.string.required,
@@ -45,7 +45,7 @@ export default class InputComponent extends React.Component {
         });
         break;
 
-      case this.TYPES.DATE:
+      case InputComponent.TYPES.DATE:
         Object.assign({}, config, {
           type: PropTypes.string.required,
           name: PropTypes.string.required,
@@ -60,7 +60,7 @@ export default class InputComponent extends React.Component {
         });
         break;
 
-      case this.TYPES.SELECT:
+      case InputComponent.TYPES.SELECT:
         Object.assign({}, config, {
           children: PropTypes.array.required,
           errorText: PropTypes.string.required,
@@ -71,7 +71,7 @@ export default class InputComponent extends React.Component {
         });
         break;
 
-      case this.TYPES.MULTILINE:
+      case InputComponent.TYPES.MULTILINE:
         Object.assign({}, config, {
           name: PropTypes.array.required,
           errorText: PropTypes.string.required,
@@ -87,8 +87,8 @@ export default class InputComponent extends React.Component {
   }
 
   render() {
-    switch(this.type) {
-      case this.TYPES.TEXT:
+    switch(this.props.inputType) {
+      case InputComponent.TYPES.TEXT:
         return (
           <TextField
             id={this.props.id}
@@ -103,7 +103,7 @@ export default class InputComponent extends React.Component {
             disabled={this.props.shouldDisable()}
           />
         );
-      case this.TYPES.DATE:
+      // case InputComponent.TYPES.DATE:
         // return (
         //   <DatePicker
         //     hintText={this.props.hint}
@@ -120,7 +120,7 @@ export default class InputComponent extends React.Component {
         //     disabled={this.props.shouldDisable()}
         //   />
         // );
-      case this.TYPES.SELECT:
+      // case InputComponent.TYPES.SELECT:
         // return (
         //   <SelectField
         //     id={this.props.id}
@@ -136,24 +136,24 @@ export default class InputComponent extends React.Component {
         //     maxHeight={this.props.maxHeight}
         //   />
         // );
-      case this.TYPES.MULTILINE:
-        // return (
-        //   <TextField
-        //     id={this.props.id}
-        //     type="text"
-        //     name={this.props.name}
-        //     errorText={this.props.errorText}
-        //     hintText={this.props.hint}
-        //     floatingLabelText={this.props.label}
-        //     fullWidth={this.props.fullWidth}
-        //     defaultValue={this.props.defaultValue}
-        //     onChange={this.onChange}
-        //     disabled={this.props.shouldDisable()}
-        //     multiLine
-        //     rows={this.props.rows}
-        //     rowsMax={this.props.rowsMax}
-        //   />
-        // );
+      case InputComponent.TYPES.MULTILINE:
+        return (
+          <TextField
+            id={this.props.id}
+            type="text"
+            name={this.props.name}
+            errorText={this.props.errorText}
+            hintText={this.props.hint}
+            floatingLabelText={this.props.label}
+            fullWidth={this.props.fullWidth}
+            defaultValue={this.props.defaultValue}
+            onChange={this.onChange}
+            disabled={this.props.shouldDisable()}
+            multiLine
+            rows={this.props.rows}
+            rowsMax={this.props.rowsMax}
+          />
+        );
     };
   }
 }
