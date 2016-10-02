@@ -575,6 +575,7 @@
       a = 1;
     }
 
+    // bad
     function f2(a) {
       if (!a) { a = 1; }
     }
@@ -584,6 +585,7 @@
       const b = a || 1;
     }
 
+    // good
     function f4(a = 1) {
     }
   ```
